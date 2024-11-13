@@ -1,9 +1,8 @@
 #! /usr/bin/env python3
 import string
-import re
 
-f = open("input1.txt", "r", encoding="utf-8")
-lines = [l.strip() for l in f.readlines()]
+#f = open("input1.txt", "r", encoding="utf-8")
+#lines = [l.strip() for l in f.readlines()]
 
 #part 1
 '''
@@ -18,11 +17,59 @@ for line in lines:
 #print(sum)
 '''
 #part 2
-numbers_as_words = r"\b(?:one|two|three|four|five|six|seven|eight|nine)\b"
-#numbers_as_digits = r"\b\d+\b"
-pattern = re.compile(numbers_as_words, re.IGNORECASE)
+'''
+nums = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
+ans = 0
 for line in lines:
-    matches = pattern.findall(line)
-    if matches:
-        print("line",line)
-        print("matches",matches)
+    first = 0
+    last = 0
+
+    for i in range(len(line)):
+        curr = None
+        if line[i].isdigit():
+            curr = int(line[i])
+
+        for j, num in enumerate(nums):
+            if line[i:i+len(num)] == num:
+                curr = j+1
+                break
+        if curr:
+            if first is None:
+                first = curr
+            last = curr
+
+    ans+=first*10+last
+print(ans)
+'''
+
+with open("input1.txt") as fin:
+    data = fin.read()
+
+ans = 0
+nums = ["one", "two", "three", "four", "five",
+        "six", "seven", "eight", "nine"]
+
+for line in data.strip().split():
+    first = None
+    last = None
+
+    for i in range(len(line)):
+        cur = None
+
+        c = line[i]
+        if c.isdigit():
+            cur = int(c)
+
+        for j, num in enumerate(nums):
+            if line[i:(i+len(num))] == num:
+                cur = j + 1
+                break
+
+        if cur:
+            if first == None:
+                first = cur
+            last = cur
+
+    ans += first * 10 + last
+
+print(ans)
