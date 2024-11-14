@@ -5,18 +5,17 @@ with open('input3.txt') as f:
 
 datarr = [line for line in data.strip().split('\n')]
 
-def getnumber(datarr, y, x):
-    s = ""
-    i = 0
-    while datarr[y][x+i].isdigit():
-        s+=datarr[y][x+i]
-        i+=1
-    return int(s),i
+
+
+dirs = [
+    [-1,-1], [-1,0], [-1,1],
+    [0,-1], [0,1],
+    [1,-1], [1,0], [1,1]
+]
 
 y=0
-x=0
-
 while y<len(datarr):
+    x=0
     while x<len(datarr[y]):
         if datarr[y][x].isdigit():
             number,i = getnumber(datarr, y, x)
@@ -24,4 +23,3 @@ while y<len(datarr):
             print(number)
         x+=1
     y+=1
-    break
