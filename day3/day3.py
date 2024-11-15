@@ -1,6 +1,9 @@
 #! /usr/bin/env python3
-
-with open('input3.txt') as f:
+'''
+with open('day3/ex3.txt') as f:
+    data = f.read()
+'''
+with open('day3/input3.txt') as f:
     data = f.read()
 
 datarr = [line for line in data.strip().split('\n')]
@@ -47,4 +50,3 @@ while y<len(datarr):
         x+=1
     y+=1
 print(sum)
-#print(get_number(datarr, 0, 6))
