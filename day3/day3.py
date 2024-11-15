@@ -12,9 +12,7 @@ dirs = [
 ]
 
 def is_symbol(v):
-    if v in '.1234567890':
-        return False
-    return True
+    return v not in ".0123456789"
 
 def check_nbrs(datarr, y, x):
     symbol = False
@@ -24,24 +22,29 @@ def check_nbrs(datarr, y, x):
             continue
         if is_symbol(datarr[y+j][x+i]):
             symbol = True
-            break
+            #break
     return symbol
-
-def get_number(datarr, y, x):
-    return 0
 
 sum = 0
 
 y=0
 while y<len(datarr):
+    curr = ""
+    curr_is_valid = False
     x=0
     while x<len(datarr[y]):
         if datarr[y][x].isdigit():
-            isValid = check_nbrs(datarr, y, x)
+            curr+=datarr[y][x]
+            valid = check_nbrs(datarr, y, x)
+            if valid and not curr_is_valid:
+                curr_is_valid = True
             #print(datarr[y][x], isValid)
-            if isValid:
-                number = get_number(datarr, y, x)
-            #sum+=int(number)
+        else:
+            if curr_is_valid:
+                sum+=int(curr)
+            curr=""
+            curr_is_valid = False
         x+=1
     y+=1
 print(sum)
+#print(get_number(datarr, 0, 6))
