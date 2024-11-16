@@ -44,6 +44,7 @@ while y<len(datarr):
             #print(datarr[y][x], isValid)
         else:
             if curr_is_valid:
+                print(curr)
                 sum+=int(curr)
             curr=""
             curr_is_valid = False
